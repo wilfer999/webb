@@ -305,4 +305,11 @@ pip-selfcheck.json
 
 webb1/media/
 
-
+# Ignores
+\.DS_Store
+\.classpath
+\.project
+\.settings
+\.metadata/
+Servers/
+target/
