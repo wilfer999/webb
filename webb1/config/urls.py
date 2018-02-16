@@ -3,11 +3,19 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
+from common.utils import DefaultRouter
 from django.views import defaults as default_views
+from view_basic.v0.urls import router as view_basic
+
+router = DefaultRouter()
+router.extend(view_basic)
 
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
+    url(r'\^admin/', admin.site.urls),
+    # url(r'\^myrestaurants/', include('webb1.urls', namespace='myrestaurants')),
+    url(r'\^api', include(router.urls, namespace='api')),
 
     # Django Admin, use {% url 'admin:index' %}
     url(settings.ADMIN_URL, admin.site.urls),

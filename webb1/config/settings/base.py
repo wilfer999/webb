@@ -8,6 +8,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
 import environ
+import os
+# import relevant_file
+# from settings import BASE_DIR, PROJECT_ROOT
 
 ROOT_DIR = environ.Path(__file__) - 3  # (webb1/config/settings/base.py - 3 = webb1/)
 APPS_DIR = ROOT_DIR.path('webb1')
@@ -55,6 +58,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     # custom users app
     'webb1.users.apps.UsersConfig',
+    'webb1.view_basic.apps.ViewBasicConfig',
     # Your stuff: custom apps go here
 ]
 
@@ -112,7 +116,23 @@ MANAGERS = ADMINS
 # See: https://django-environ.readthedocs.io/en/latest/#supported-types
 DATABASES = {
     'default': env.db('DATABASE_URL', default='postgres:///webb1'),
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'webb1',
+    #     'USER': 'root',
+    #     'PASSWORD': '',
+    #     'HOST': 'localhost',
+    #     'PORT': '',
+    # }
 }
+
+# DATABASES = {
+#     'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 
@@ -142,6 +162,14 @@ USE_TZ = True
 # TEMPLATE CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#templates
+
+# TEMPLATES = [
+#     {
+#         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+#         'DIRS': [os.path.join(BASE_DIR, 'templates')],
+#     },
+# ]
+
 TEMPLATES = [
     {
         # See: https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-TEMPLATES-BACKEND
